@@ -1,38 +1,29 @@
 # Wine Pyinstaller
 
-Compile Python 3.x scripts with Pyinstaller into 32 bit Windows executables on Ubuntu with Wine.
-This work has been forked and adapted from [kicsikrumpli/wine-pyinstaller](https://github.com/kicsikrumpli/wine-pyinstaller)
+Compile Python 3.x scripts with Pyinstaller into 32 bit Windows executables on Ubuntu with Wine. This work has been forked and adapted from outscale/wine-pyinstaller.
+
 
 ## Build Image
-
-By default X window display is set to X virtual frame buffer as `DISPLAY=:1`. Winecfg popups are not displayed, button presses are automated.
-
-To observe build time windows on external X server:
-
-- `--build-arg DISPLAY=host.docker.internal:0`
-- `xhost + 127.0.0.1` on host to enable connection to X11 from docker image
-- enable XTEST for XQuartz on mac for automated keypresses to work
-
-### Example Build
-
-````bash
-docker build -t outscale-dev/wine-pyinstaller:latest .
-````
+`make build`
 
 ## Build 32-bit Windows Python Apps
 
 - bind mount current directory with script to `/src/`
-- assumes presence of `requirements.txt`
+- assumes usage of poetry and presence of `pyproject.toml`
 - docker run parameters are passed to pyinstaller
 
 ### Example Run
 
 ````bash
-docker run -it -v $(pwd):/src outscale-dev/wine-pyinstaller --clean --onefile my_python_script.py
+docker run -it -v $(pwd):/src banduk/wine-pyinstaller \
+  --clean \
+  --name my-program \
+  --onefile \
+  my_python_script.py
 ````
 
 ## Run Bash in Container
 
 ````bash
-docker run -it outscale-dev/wine-pyinstaller --bash
+docker run -it banduk/wine-pyinstaller --bash
 ````

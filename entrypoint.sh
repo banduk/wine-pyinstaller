@@ -6,7 +6,7 @@ if [[ $1 == "--bash" ]]; then
     /bin/bash "${@:2}"
 elif [[ -d /src && -f /src/requirements.txt ]]; then
     cd /src/
-    /root/.wine/drive_c/winew.sh pip3 install -r /src/requirements.txt
+    /root/.wine/drive_c/winew.sh poetry install
     /root/.wine/drive_c/winew.sh pyinstaller $@
 else
     echo "         _                        _         _        _ _          "
@@ -17,9 +17,9 @@ else
     echo "Usage:"
     echo "A,"
     echo "To invoke pyinstaller, bind mount script directory as /src and pass pyinstaller parameters"
-    echo "docker run -it -v $(pwd):/src outscale-dev/wine-pyinstaller --onefile --clean myscript.py "
+    echo "docker run -it -v $(pwd):/src banduk/wine-pyinstaller --onefile --clean myscript.py "
     echo "---"
     echo "B,"
     echo "To run bash pass --bash, and optionally bash parameters"
-    echo "docker run -it outscale-dev/wine-pyinstaller --bash"
+    echo "docker run -it banduk/wine-pyinstaller --bash"
 fi

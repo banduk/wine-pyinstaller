@@ -59,4 +59,4 @@ echo "Installing Python..."
 ./winew.sh python.exe /quiet InstallAllUsers=1 PrependPath=1
 
 echo "Installing Pyinstaller..."
-./winew.sh pip3 install pyinstaller
+./winew.sh pip3 install pyinstaller poetry

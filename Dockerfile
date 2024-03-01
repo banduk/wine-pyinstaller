@@ -1,6 +1,6 @@
 # build wine
 FROM i386/ubuntu as winebuild
-LABEL maintainer="opensource@outscale.com"
+LABEL maintainer="banduk@talismanai.com"
 
 # build:
 # external X server at build time: --build-arg DISPLAY=host.docker.internal:0
@@ -17,7 +17,7 @@ RUN apt-get build-dep -y wine
 
 # copy, unpack, build wine source
 ADD wine.tar.xz /
-WORKDIR /wine-4.7
+WORKDIR /wine-9.3
 RUN ./configure && make && make install
 
 RUN apt-get update && apt-get install -y xdotool xvfb
